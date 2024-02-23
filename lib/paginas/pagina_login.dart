@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/componentes/boton_auth.dart';
 import 'package:flutter_firebase/componentes/textfield_auth.dart';
 
 class Paginalogin extends StatefulWidget {
@@ -28,6 +29,7 @@ class _PaginaloginState extends State<Paginalogin> {
              size: 120,
              color: Color.fromARGB(255, 255, 240, 218 ), 
             ),
+            const SizedBox(height: 10,),
             //FRASE
             const Text(
               "Benvingut/da de nou",
@@ -37,37 +39,62 @@ class _PaginaloginState extends State<Paginalogin> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 25,),
             //Text divisori
-            const Row(
-              children: [
-                Expanded(
-                  child: Divider(
-                    thickness: 1,
-                    color: Color.fromARGB(255, 255, 240, 218),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      thickness: 1,
+                      color: Color.fromARGB(255, 255, 240, 218),
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: Text(
-                    "LOGUEATE",
-                    style: TextStyle(color: Color.fromARGB(255, 255, 250, 218),),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    child: Text(
+                      "LOGUEATE",
+                      style: TextStyle(color: Color.fromARGB(255, 255, 250, 218),),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Divider(
-                    thickness: 1,
-                    color: Color.fromARGB(255, 255, 240, 218),
+                  Expanded(
+                    child: Divider(
+                      thickness: 1,
+                      color: Color.fromARGB(255, 255, 240, 218),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
+            const SizedBox(height: 10,),
             //TextField Email
             TextFieldAuth(controller: controllerEmail, obscureText: false, hintText: "Email"),
             //TextField Password
             TextFieldAuth(controller: controllerContrasena, obscureText: true, hintText: "Password"),
+            const SizedBox(height: 10,),
             //No estas registrado
-        
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("¿No eres miembro?"),
+                  SizedBox(width: 5,),
+                  GestureDetector(
+                    onTap: (){},
+                    child: const Text("Registarte",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 44, 174, 255),
+                    ),),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10,),
             //Boton login
+            const BotonAuth(),
           ],
         ),
       ),
