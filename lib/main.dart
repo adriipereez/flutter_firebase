@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/paginas/pagina_login.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -25,4 +31,11 @@ class MyApp extends StatelessWidget {
     - Si da error del archivo firebase.ps1, entramos en la ruta y cambiamos nombre
     - Si volemos a hacer login, nos dice que en que cuenta estanmos
     - Si quisieramos cambiar de cuenta, hacemos fireabse logout
+
+4) Fer: dart pub global activate flutterfire_cli
+5) Vincular proyecta local con el proyecto firebase de la consola.
+    - flutterfire configure y seleccionamos el proyecto y que elegimos intsalar
+
+6) Incluir las liobrerias de Firebase que queramos utilizar
+    - flutter pub add firebase_auth
 */

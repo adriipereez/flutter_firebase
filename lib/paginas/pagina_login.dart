@@ -14,6 +14,10 @@ class _PaginaloginState extends State<Paginalogin> {
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerContrasena = TextEditingController();
 
+  void HacerLogin() {
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +100,10 @@ class _PaginaloginState extends State<Paginalogin> {
                   ),
                   const SizedBox(height: 10,),
                   //Boton login
-                  const BotonAuth(),
+                  BotonAuth(
+                    text: "LOGIN",
+                    onTap: HacerLogin,
+                  ),
                 ],
               ),
             ),
