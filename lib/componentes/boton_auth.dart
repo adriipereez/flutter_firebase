@@ -18,8 +18,8 @@ class BotonAuth extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 200, vertical: 25),
         margin: EdgeInsets.all(25),
-        child: const Text(
-          "Login",
+        child: Text(
+          text,
           style: TextStyle(
             color: Color.fromARGB(255, 230, 193, 139),
             fontWeight: FontWeight.bold,

@@ -3,7 +3,10 @@ import 'package:flutter_firebase/componentes/boton_auth.dart';
 import 'package:flutter_firebase/componentes/textfield_auth.dart';
 
 class Paginalogin extends StatefulWidget {
-  const Paginalogin({super.key});
+
+  final void Function() alHacerClick;
+
+  const Paginalogin({super.key, required this.alHacerClick,});
 
   @override
   State<Paginalogin> createState() => _PaginaloginState();
@@ -88,7 +91,7 @@ class _PaginaloginState extends State<Paginalogin> {
                         Text("¿No eres miembro?"),
                         SizedBox(width: 5,),
                         GestureDetector(
-                          onTap: (){},
+                          onTap: widget.alHacerClick,
                           child: const Text("Registarte",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,

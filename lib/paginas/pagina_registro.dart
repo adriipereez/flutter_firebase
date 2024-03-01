@@ -2,11 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase/componentes/boton_auth.dart';
 import 'package:flutter_firebase/componentes/textfield_auth.dart';
 
-class PaginaRegistro extends StatelessWidget {
-  PaginaRegistro({super.key});
+class PaginaRegistro extends StatefulWidget {
 
+  final void Function() alHacerClick;
+
+  PaginaRegistro({super.key, required this.alHacerClick});
+
+  @override
+  State<PaginaRegistro> createState() => _PaginaRegistroState();
+}
+
+class _PaginaRegistroState extends State<PaginaRegistro> {
   final TextEditingController controllerEmail = TextEditingController();
+
   final TextEditingController controllerContrasena = TextEditingController();
+
   final TextEditingController controllerConfirmarContrasena = TextEditingController();
 
   void HacerRegistro() {
@@ -83,7 +93,7 @@ class PaginaRegistro extends StatelessWidget {
                         Text("¿Ya eres miembro?"),
                         SizedBox(width: 5,),
                         GestureDetector(
-                          onTap: (){},
+                          onTap: widget.alHacerClick,
                           child: const Text("Logueate",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -96,7 +106,7 @@ class PaginaRegistro extends StatelessWidget {
                   const SizedBox(height: 10,),
                   //Boton login
                   BotonAuth(
-                    text: "LOGIN",
+                    text: "REGISTRO",
                     onTap: HacerRegistro,
                   ),
                 ],

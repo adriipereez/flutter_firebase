@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/auth/login_o_registro.dart';
 import 'package:flutter_firebase/paginas/pagina_login.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -6,9 +7,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFire
-  );
+ // await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -20,11 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Paginalogin(),
+      home: LoginORegistro(),
       debugShowCheckedModeBanner: false ,
     );
   }
 }
+
+
 
 /*
 1) Tener el Node.js instalado
