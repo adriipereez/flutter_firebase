@@ -20,4 +20,7 @@ class ServicioAuth{
   //hacer registro
 
   //hacer logout
+  Future<void> cerrarsesion() async {
+    return await _auth.signOut();
+  }
 }

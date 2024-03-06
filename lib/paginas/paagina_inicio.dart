@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/auth/servicio_auth.dart';
 
 class PaginaInicio extends StatelessWidget {
   const PaginaInicio({super.key});
@@ -19,6 +20,7 @@ class PaginaInicio extends StatelessWidget {
   }
 
   void logout() {
-    
+    final servicioAuth = ServicioAuth();
+    servicioAuth.cerrarsesion();
   }
 }
