@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/auth/servicio_auth.dart';
 import 'package:flutter_firebase/componentes/boton_auth.dart';
 import 'package:flutter_firebase/componentes/textfield_auth.dart';
 
@@ -19,8 +20,16 @@ class _PaginaRegistroState extends State<PaginaRegistro> {
 
   final TextEditingController controllerConfirmarContrasena = TextEditingController();
 
-  void HacerRegistro() {
-    
+  void HacerRegistro(BuildContext context) async {
+    final servicioAuth = ServicioAuth();
+    try {
+      servicioAuth.RegistroConEmailPassword(controllerEmail.text, controllerContrasena.text);
+    } catch (e){
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: const Text("ERROR"),
+        content: Text(e.toString()),
+      ));
+    }
   }
 
   @override
@@ -107,7 +116,7 @@ class _PaginaRegistroState extends State<PaginaRegistro> {
                   //Boton login
                   BotonAuth(
                     text: "REGISTRO",
-                    onTap: HacerRegistro,
+                    onTap: () => HacerRegistro(context),
                   ),
                 ],
               ),
