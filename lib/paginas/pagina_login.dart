@@ -1,4 +1,7 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase/auth/servicio_auth.dart';
 import 'package:flutter_firebase/componentes/boton_auth.dart';
 import 'package:flutter_firebase/componentes/textfield_auth.dart';
 
@@ -17,8 +20,23 @@ class _PaginaloginState extends State<Paginalogin> {
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerContrasena = TextEditingController();
 
-  void HacerLogin() {
-    
+  void HacerLogin(BuildContext context) async {
+    final servicioAuth = ServicioAuth();
+
+    try{
+
+      await servicioAuth.loginConEmailPassword(
+        controllerEmail.text, 
+        controllerContrasena.text,
+      );
+
+    } catch (e) {
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: const Text("ERROR"),
+        content: Text(e.toString()),
+      ));
+    }
+
   }
 
   @override
@@ -105,7 +123,7 @@ class _PaginaloginState extends State<Paginalogin> {
                   //Boton login
                   BotonAuth(
                     text: "LOGIN",
-                    onTap: HacerLogin,
+                    onTap:() => HacerLogin(context),
                   ),
                 ],
               ),
