@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/auth/servicio_auth.dart';
 import 'package:flutter_firebase/componentes/boton_auth.dart';
@@ -106,8 +104,8 @@ class _PaginaloginState extends State<Paginalogin> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("¿No eres miembro?"),
-                        SizedBox(width: 5,),
+                        const Text("¿No eres miembro?"),
+                        const SizedBox(width: 5,),
                         GestureDetector(
                           onTap: widget.alHacerClick,
                           child: const Text("Registarte",

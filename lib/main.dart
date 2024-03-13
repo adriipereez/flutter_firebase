@@ -42,5 +42,7 @@ class MyApp extends StatelessWidget {
     - flutterfire configure y seleccionamos el proyecto y que elegimos intsalar
 
 6) Incluir las liobrerias de Firebase que queramos utilizar
+    - flutter pub add firebase_core
     - flutter pub add firebase_auth
+    - flutter pub add cloud_firestore
 */

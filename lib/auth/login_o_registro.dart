@@ -4,8 +4,6 @@ import 'package:flutter_firebase/paginas/pagina_registro.dart';
 
 class LoginORegistro extends StatefulWidget {
 
-
-
   const LoginORegistro({super.key});
 
   @override
