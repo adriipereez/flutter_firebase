@@ -11,6 +11,16 @@ class ServicioAuth {
     try {
       UserCredential credencialusuario = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
+
+      if (credencialusuario.user != null) {
+        String uid = credencialusuario.user!.uid;
+        _firestore
+            .collection("Usuarios")
+            .doc(uid)
+            .set({"uid": credencialusuario.user!.uid, "email": email});
+      } else {
+        throw Exception("El usuario es nulo");
+      }
       return credencialusuario;
     } on FirebaseAuthException catch (error) {
       throw Exception(error.code);
@@ -18,31 +28,35 @@ class ServicioAuth {
   }
 
   //hacer registro
-  Future<UserCredential> RegistroConEmailPassword(String email, password) async {
-  try {
-    UserCredential credencialusuario = await _auth.createUserWithEmailAndPassword(
-      email: email,  
-      password: password
-    );
+  Future<UserCredential> RegistroConEmailPassword(
+      String email, password) async {
+    try {
+      UserCredential credencialusuario = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-    if (credencialusuario.user != null) {
-      String uid = credencialusuario.user!.uid;
-      _firestore.collection("Usuarios").doc(uid).set({
-        "uid": credencialusuario.user!.uid,
-        "email": email
-      });
-    } else {
-      throw Exception("El usuario es nulo");
+      if (credencialusuario.user != null) {
+        String uid = credencialusuario.user!.uid;
+        _firestore
+            .collection("Usuarios")
+            .doc(uid)
+            .set({"uid": credencialusuario.user!.uid, "email": email});
+      } else {
+        throw Exception("El usuario es nulo");
+      }
+
+      return credencialusuario;
+    } on FirebaseAuthException catch (error) {
+      throw Exception(error.code);
     }
-
-    return credencialusuario;
-  } on FirebaseAuthException catch (error) {
-    throw Exception(error.code);
   }
-}
 
   //hacer logout
   Future<void> cerrarsesion() async {
     return await _auth.signOut();
   }
+
+  User? getUsuarioActual(){
+    return _auth.currentUser;
+  }
+
 }

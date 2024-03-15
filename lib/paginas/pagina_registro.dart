@@ -14,6 +14,7 @@ class PaginaRegistro extends StatefulWidget {
 }
 
 class _PaginaRegistroState extends State<PaginaRegistro> {
+
   final TextEditingController controllerEmail = TextEditingController();
 
   final TextEditingController controllerContrasena = TextEditingController();
