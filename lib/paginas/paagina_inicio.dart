@@ -4,6 +4,8 @@ import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase/auth/servicio_auth.dart';
 import 'package:flutter_firebase/chat/servicio_caht.dart';
+import 'package:flutter_firebase/componentes/item_usuario.dart';
+import 'package:flutter_firebase/paginas/chat.dart';
 
 class PaginaInicio extends StatelessWidget {
   PaginaInicio({super.key});
@@ -37,6 +39,7 @@ final ServicioChat _servicioChat = ServicioChat();
         if(Snapshot.connectionState == ConnectionState.waiting){
           return const Text("Cargando datos...");
         }
+        
         //Se retornan los datos
         return ListView(
           children: Snapshot.data!.map<Widget>((datosusuario) => _contruirItemUsuario(datosusuario, context)
@@ -51,7 +54,12 @@ final ServicioChat _servicioChat = ServicioChat();
     if(datosusuario["email"] == _servicioAuth.getUsuarioActual()!.email){
       return Container();
     }
-   return Text(datosusuario["email"]);
+   return Itemusuario(
+    emailUsuario: datosusuario['email'],
+    Ontap: () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaChat()));
+    },
+    );
   }
 
 
