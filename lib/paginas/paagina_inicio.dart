@@ -57,7 +57,7 @@ final ServicioChat _servicioChat = ServicioChat();
    return Itemusuario(
     emailUsuario: datosusuario['email'],
     Ontap: () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaChat()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaChat(emailConQuienhablamos: datosusuario["email"],)));
     },
     );
   }
