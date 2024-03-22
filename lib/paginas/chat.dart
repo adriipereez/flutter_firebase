@@ -1,7 +1,14 @@
+import 'dart:html';
+import 'dart:js_interop';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_firebase/auth/servicio_auth.dart';
 import 'package:flutter_firebase/chat/servicio_caht.dart';
+import 'package:flutter_firebase/componentes/bombollaMensaje.dart';
+import 'package:flutter_firebase/models/mensaje.dart';
 
 class PaginaChat extends StatefulWidget {
   final String emailConQuienhablamos;
@@ -20,6 +27,8 @@ class PaginaChat extends StatefulWidget {
 class _PaginaChatState extends State<PaginaChat> {
 
   final TextEditingController controllerMensaje = TextEditingController();
+
+  final ServicioAuth servicioAuth = ServicioAuth();
 
   final ServicioChat servicioChat = ServicioChat();
 
@@ -58,7 +67,50 @@ class _PaginaChatState extends State<PaginaChat> {
   }
 
   Widget _contruirlistaMensajes(){
-    return Container();
+
+    String idUsuarioActual = servicioAuth.getUsuarioActual()!.uid;
+
+    return StreamBuilder(
+      stream: servicioChat.getMensaje(idUsuarioActual, widget.idReceptor), 
+      builder: (context, snapshot){
+
+        // En caso de que haya algun error
+        if (snapshot.hasError){
+          return const Text("Error al cargar el mensaje");
+        }
+        // Estar cargando
+        if (snapshot.connectionState == ConnectionState.waiting){
+          return const Text("Cargando...");
+        }
+        // Retornar dades (ListView)
+        return ListView(
+          children: snapshot.data!.docs.map((document) => _contruirItemMensaje(document)).toList(),
+        );
+      }
+      );
+  }
+
+  Widget _contruirItemMensaje(DocumentSnapshot documentSnapshot){
+
+    Map<String, dynamic> data = documentSnapshot.data() as Map<String,dynamic>;
+
+    //Saber si lo mostramos a la izquierda o a la derecha
+
+    // Si es usuario actual
+    bool esUsuarioActual = data["idAutor"] == servicioAuth.getUsuarioActual()!.uid;
+    print("hola");
+    print(data["mensaje"]);
+
+    var aliniament = esUsuarioActual ? Alignment.centerRight : Alignment.centerLeft;
+    var colorBombolla = esUsuarioActual ? Colors.green[200] : Colors.amber[300];
+
+    return Container(
+      alignment: aliniament,
+      child: BombollaMensaje(
+        colorBombolla : colorBombolla??Colors.black,
+        mensaje: data["mensaje"]
+      )
+    );
   }
 
   Widget _contruirZonaInputUsuario(){

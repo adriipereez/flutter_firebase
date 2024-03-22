@@ -41,4 +41,15 @@ class ServicioChat{
       await _firestore.collection("SalasChat").doc(idSalaChat).collection("Mensajes").add(nuevoMensaje.retornarMapaMensaje());
   }
 
+  Stream<QuerySnapshot> getMensaje(String idUsuarioActual, idReceptor){
+
+    //Queremos encontrar la sala de chat formada pro los dos usuarios.
+    //  (idusuariActual i idReceptor)
+    //Creamos el id de la sala de chat como cuando guardamos mensajes.
+    List<String> idusuarios = [idUsuarioActual, idReceptor];
+    idusuarios.sort();
+    String idSalaChat = idusuarios.join("_");
+    return _firestore.collection("SalasChat").doc(idSalaChat).collection("Mensajes").orderBy("timestamp", descending: false).snapshots();
+  }
+
 }
