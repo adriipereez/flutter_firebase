@@ -27,8 +27,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
 /*
 1) Tener el Node.js instalado
 2) npm install -g firebase-tools
@@ -45,4 +43,27 @@ class MyApp extends StatelessWidget {
     - flutter pub add firebase_core
     - flutter pub add firebase_auth
     - flutter pub add cloud_firestore
+*/
+
+
+/*
+IMAGENES:
+
+1) HabilitarFirebase Storage en el proyecto vinculado en Firebase.
+  - Se puede poner las reglas en true el write i read
+
+2) Descargamos dependencias de Firebase Storage al proyecto
+  - flutter pub add firebase_storage
+
+3) Descargamos una dependencia para seleccionar imagenes (un picker).
+  - Hay varios
+  - Usaremos el image_picker
+    - flutter pub add image_picker
+
+4) Para que funcione en Android:
+  - Ir a android > app > src > main > AndroidMainfest.xml
+    - Escribir justo antes del tag <aplication> (fuera del aplication)
+    <uses-permission android:name="android.permision.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permision.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permision.READ_MEDIA_VIDEO"/>
 */
