@@ -32,17 +32,57 @@ class _PaginaChatState extends State<PaginaChat> {
 
   final ServicioChat servicioChat = ServicioChat();
 
-  void EnviarMensaje(){
+  final ScrollController controllerScroll = ScrollController();
+
+  //variable para el teclado del mvil
+
+  final FocusNode focusNode = FocusNode();
+
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode.addListener(() { 
+      Future.delayed(
+      const Duration(milliseconds: 500),
+      () => hacerScroll(),
+      );
+    });
+    // Nos esperamos un momento y entonce movemos para abajo
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () => hacerScroll(),
+    );
+  }
+  @override
+  void dispose() {
+
+    focusNode.dispose();
+    controllerMensaje.dispose();
+
+    super.dispose();
+  }
+
+  void hacerScroll(){
+    controllerScroll.animateTo(
+      controllerScroll.position.maxScrollExtent,
+      duration: const Duration(seconds: 1), 
+      curve: Curves.fastLinearToSlowEaseIn);
+  }
+
+  void EnviarMensaje() async {
     if(controllerMensaje.text.isNotEmpty){
       //Enviar el mensaje
-      servicioChat.EnviarMensaje(
+      await servicioChat.EnviarMensaje(
         widget.idReceptor, 
         controllerMensaje.text
       );
       //Limpiar el campo
       controllerMensaje.clear();
     }
+    hacerScroll();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +124,7 @@ class _PaginaChatState extends State<PaginaChat> {
         }
         // Retornar dades (ListView)
         return ListView(
+          controller: controllerScroll,
           children: snapshot.data!.docs.map((document) => _contruirItemMensaje(document)).toList(),
         );
       }
