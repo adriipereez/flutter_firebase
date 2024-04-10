@@ -66,4 +66,30 @@ IMAGENES:
     <uses-permission android:name="android.permision.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permision.READ_MEDIA_IMAGES"/>
     <uses-permission android:name="android.permision.READ_MEDIA_VIDEO"/>
+
+  - Seguramente ademas, faltara ir a : android > app > build.gradle
+    - Donde dice minSdjversion flutter.minSdkversion, cambiarlo por: minSdkVersion
+
+  -Si da error diciendo: OPne more plugins require a higher Android SDK version
+    - Ir a: android > app > build.gradle, i poner:
+      - compileSdkVersion 34
+
+5) Para que funcione en Ios
+  - ir a Ios > runner > Info.plist
+  - Añadir los permisos con las siguientes lineas
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Privacy - Photo Library Usage Description</string>
+    <key>NSMotionUsageDescription</key>
+    <string>Motion usage description</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>NSPhotoLibraryAddUsageDescription</string>
+
+6) Para que funcione en web
+  - Ir a web > index.html
+  - Donde dice "onEntrypointLoaded"
+    onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine().then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
 */
