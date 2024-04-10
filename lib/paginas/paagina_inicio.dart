@@ -6,6 +6,7 @@ import 'package:flutter_firebase/auth/servicio_auth.dart';
 import 'package:flutter_firebase/chat/servicio_caht.dart';
 import 'package:flutter_firebase/componentes/item_usuario.dart';
 import 'package:flutter_firebase/paginas/chat.dart';
+import 'package:flutter_firebase/paginas/editarDatosusuarios.dart';
 
 class PaginaInicio extends StatelessWidget {
   PaginaInicio({super.key});
@@ -19,8 +20,13 @@ final ServicioChat _servicioChat = ServicioChat();
         title: Text("Pagina Incio"),
         actions: [
           IconButton(
-            onPressed: logout,
-           icon: Icon(Icons.logout)
+            onPressed: (){
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (context) => const EditarDatosUsuario()));
+            },
+           icon: const Icon(Icons.person)
            ),
         ],
       ),
